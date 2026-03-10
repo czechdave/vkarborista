@@ -1,0 +1,121 @@
+---
+const services = [
+  {
+    title: "Rizikové kácení",
+    description: "Bezpečné kácení problematických stromů v těžko přístupných místech, blízko budov a inženýrských sítí.",
+    icon: "chainsaw",
+  },
+  {
+    title: "Ořezávání korun",
+    description: "Odborné tvarování a prořezy korun stromů pro jejich zdravý růst a bezpečnost okolí.",
+    icon: "pruning",
+  },
+  {
+    title: "Zdravotní řez",
+    description: "Odstranění suchých, poškozených a nemocných větví pro zlepšení zdravotního stavu stromu.",
+    icon: "health",
+  },
+  {
+    title: "Bezpečnostní řez",
+    description: "Řez zamezující hrozícímu pádu větví či celých stromů ohrožujících osoby a majetek.",
+    icon: "safety",
+  },
+  {
+    title: "Instalace vazeb",
+    description: "Zajištění stability stromu pomocí dynamických či statických vazebných systémů.",
+    icon: "cables",
+  },
+  {
+    title: "Konzultace a posudky",
+    description: "Odborné posouzení stavu stromu, návrhy péče a poradenství pro majitele pozemků.",
+    icon: "consult",
+  },
+];
+---
+
+<section id="sluzby" class="relative py-24 sm:py-32 bg-white leaf-pattern">
+  <!-- Decorative branch top -->
+  <div class="absolute top-0 left-0 right-0 overflow-hidden h-16" aria-hidden="true">
+    <svg class="absolute -top-1 left-0 w-full" viewBox="0 0 1440 60" preserveAspectRatio="none">
+      <path d="M0 60 C360 0 1080 0 1440 60 L1440 0 L0 0Z" fill="#f0fdf4"/>
+    </svg>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center mb-16 sm:mb-20">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-forest-100 text-forest-700 text-sm font-medium mb-6">
+        <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.25S2 11.5 2 13.5s1.75 3.75 1.75 3.75C7 8 17 8 17 8z"/>
+        </svg>
+        Naše služby
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold text-forest-900 mb-6">
+        Co pro vás můžeme udělat
+      </h2>
+      <p class="text-lg text-forest-600 max-w-2xl mx-auto">
+        Poskytujeme komplexní arboristické služby s důrazem na bezpečnost, kvalitu a šetrný přístup ke stromům.
+      </p>
+    </div>
+
+    <!-- Services grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {services.map((service, i) => (
+        <div
+          class="group relative bg-forest-50/50 rounded-2xl p-8 border border-forest-200/50 hover:border-forest-400/50 hover:shadow-xl hover:shadow-forest-200/30 transition-all duration-500 hover:-translate-y-1"
+        >
+          <!-- Icon -->
+          <div class="w-14 h-14 rounded-xl bg-forest-100 group-hover:bg-forest-500 flex items-center justify-center mb-6 transition-colors duration-300">
+            {service.icon === "chainsaw" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13 10V3L4 14h7v7l9-11h-7z"/>
+              </svg>
+            )}
+            {service.icon === "pruning" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.121 14.121L19 19m-7-7l7-7m-7 7l-2.879 2.879M12 12L4.929 4.929m0 0a3 3 0 10-4.243 4.243 3 3 0 004.243-4.243zm14.142 14.142a3 3 0 10-4.243-4.243 3 3 0 004.243 4.243z"/>
+              </svg>
+            )}
+            {service.icon === "health" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+              </svg>
+            )}
+            {service.icon === "safety" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            )}
+            {service.icon === "cables" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+              </svg>
+            )}
+            {service.icon === "consult" && (
+              <svg class="w-7 h-7 text-forest-600 group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/>
+              </svg>
+            )}
+          </div>
+
+          <!-- Tree ring decoration -->
+          <div class="absolute top-4 right-4 w-16 h-16 opacity-0 group-hover:opacity-10 transition-opacity duration-500" aria-hidden="true">
+            <svg viewBox="0 0 64 64">
+              <circle cx="32" cy="32" r="28" fill="none" stroke="#166534" stroke-width="1"/>
+              <circle cx="32" cy="32" r="20" fill="none" stroke="#166534" stroke-width="1"/>
+              <circle cx="32" cy="32" r="12" fill="none" stroke="#166534" stroke-width="1"/>
+              <circle cx="32" cy="32" r="4" fill="#166534"/>
+            </svg>
+          </div>
+
+          <h3 class="font-display text-xl font-bold text-forest-900 mb-3">
+            {service.title}
+          </h3>
+          <p class="text-forest-600 leading-relaxed">
+            {service.description}
+          </p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

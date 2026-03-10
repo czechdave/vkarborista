@@ -1,0 +1,110 @@
+---
+import '../styles/global.css'
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = "Arboristika Kutná Hora | Vojta Koutský – Řezání a kácení stromů",
+  description = "Profesionální arboristika a rizikové kácení stromů v Kutné Hoře a okolí. Řezání stromů, ořez korun, zdravotní řezy. Vojta Koutský – arborista od roku 2018."
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/images/hero-cover.jpg', Astro.site);
+---
+
+<html lang="cs">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="arboristika, arborista, řezání stromů, kácení stromů, rizikové kácení, ořez stromů, péče o stromy, Kutná Hora, Středočeský kraj, zdravotní řez, bezpečnostní řez, ořezávání korun" />
+    <meta name="author" content="Vojta Koutský" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalURL} />
+
+    <!-- Geo tags -->
+    <meta name="geo.region" content="CZ-20" />
+    <meta name="geo.placename" content="Kutná Hora" />
+    <meta name="geo.position" content="49.9481;15.2683" />
+    <meta name="ICBM" content="49.9481, 15.2683" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="cs_CZ" />
+    <meta property="og:site_name" content="Vojta Koutský – Arboristika" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": "https://vkarborista.cz",
+      "name": "Vojta Koutský – Arboristika",
+      "description": "Profesionální arboristika a rizikové kácení stromů v Kutné Hoře a okolí. Řezání stromů, ořez korun, zdravotní řezy od roku 2018.",
+      "url": "https://vkarborista.cz",
+      "telephone": "+420606535475",
+      "email": "citac@seznam.cz",
+      "image": "https://vkarborista.cz/images/hero-cover.jpg",
+      "foundingDate": "2018",
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Kutná Hora"
+        },
+        {
+          "@type": "AdministrativeArea",
+          "name": "Středočeský kraj"
+        }
+      ],
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Kutná Hora",
+        "addressRegion": "Středočeský kraj",
+        "addressCountry": "CZ"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 49.9481,
+        "longitude": 15.2683
+      },
+      "sameAs": [
+        "https://www.facebook.com/people/Vojta-Koutsk%C3%BD-Arboristika/61555456270844/"
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Arboristické služby",
+        "itemListElement": [
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rizikové kácení stromů" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ořezávání korun" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Zdravotní řez" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bezpečnostní řez" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalace vazeb" } },
+          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Konzultace a posudky" } }
+        ]
+      }
+    })} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <title>{title}</title>
+  </head>
+  <body class="bg-forest-50 text-forest-950 antialiased">
+    <slot />
+  </body>
+</html>

@@ -1,0 +1,113 @@
+---
+// About section with tree-ring decoration
+---
+
+<section id="o-mne" class="relative py-24 sm:py-32 bg-forest-900 text-white overflow-hidden">
+  <!-- Tree ring background pattern -->
+  <div class="absolute inset-0 ring-pattern opacity-30"></div>
+
+  <!-- Decorative large tree ring -->
+  <div class="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] opacity-10" aria-hidden="true">
+    <svg viewBox="0 0 500 500">
+      <circle cx="250" cy="250" r="240" fill="none" stroke="#4ade80" stroke-width="1"/>
+      <circle cx="250" cy="250" r="200" fill="none" stroke="#4ade80" stroke-width="1"/>
+      <circle cx="250" cy="250" r="160" fill="none" stroke="#4ade80" stroke-width="1"/>
+      <circle cx="250" cy="250" r="120" fill="none" stroke="#4ade80" stroke-width="1"/>
+      <circle cx="250" cy="250" r="80" fill="none" stroke="#4ade80" stroke-width="1"/>
+      <circle cx="250" cy="250" r="40" fill="none" stroke="#4ade80" stroke-width="2"/>
+      <circle cx="250" cy="250" r="10" fill="#4ade80"/>
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+      <!-- Left: Profile photo -->
+      <div class="relative order-2 lg:order-1">
+        <div class="relative max-w-md mx-auto">
+          <!-- Profile image -->
+          <div class="relative rounded-3xl overflow-hidden shadow-2xl">
+            <img
+              src="/images/profil.jpg"
+              alt="Vojta Koutský - arborista s motorovou pilou"
+              class="w-full h-auto object-cover"
+              loading="lazy"
+            />
+            <!-- Subtle green overlay gradient -->
+            <div class="absolute inset-0 bg-gradient-to-t from-forest-900/40 via-transparent to-transparent"></div>
+          </div>
+
+          <!-- Floating stats -->
+          <div class="absolute top-4 -left-4 sm:top-8 sm:-left-8 bg-forest-700/90 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl animate-float z-10">
+            <div class="text-2xl font-bold text-forest-300">7+</div>
+            <div class="text-sm text-forest-200/70">let praxe</div>
+          </div>
+
+          <div class="absolute bottom-4 -right-4 sm:bottom-8 sm:-right-8 bg-forest-700/90 backdrop-blur-sm rounded-2xl px-5 py-3 shadow-xl animate-float z-10" style="animation-delay: -1.5s;">
+            <div class="text-2xl font-bold text-forest-300">100%</div>
+            <div class="text-sm text-forest-200/70">bezpečnost</div>
+          </div>
+
+          <!-- Decorative tree ring behind photo -->
+          <div class="absolute -bottom-6 -left-6 w-32 h-32 opacity-20 -z-1" aria-hidden="true">
+            <svg viewBox="0 0 128 128">
+              <circle cx="64" cy="64" r="60" fill="none" stroke="#4ade80" stroke-width="1"/>
+              <circle cx="64" cy="64" r="45" fill="none" stroke="#4ade80" stroke-width="1"/>
+              <circle cx="64" cy="64" r="30" fill="none" stroke="#4ade80" stroke-width="1"/>
+              <circle cx="64" cy="64" r="15" fill="none" stroke="#4ade80" stroke-width="1"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: Text content -->
+      <div class="order-1 lg:order-2">
+        <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-forest-800 text-forest-300 text-sm font-medium mb-6">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+          </svg>
+          O mně
+        </div>
+
+        <h2 class="font-display text-4xl sm:text-5xl font-bold mb-8 leading-tight">
+          Péče o stromy
+          <span class="text-forest-400"> s láskou</span>
+          a odborností
+        </h2>
+
+        <div class="space-y-6 text-forest-200/80 text-lg leading-relaxed">
+          <p>
+            Jmenuji se Vojta Koutský a stromům se profesionálně věnuji od roku 2018.
+            Působím především v Kutné Hoře a okolí.
+          </p>
+          <p>
+            Každý strom je jedinečný a zaslouží si individuální přístup. Ať už
+            potřebujete rizikové kácení v blízkosti budov, odborný řez korun, nebo
+            konzultaci o stavu vašich stromů — jsem tu pro Vás.
+          </p>
+          <p>
+            Pracuji s moderním vybavením, kladu důraz na bezpečnost a snažím se
+            ke každému stromu přistupovat s respektem a odbornými znalostmi.
+          </p>
+        </div>
+
+        <!-- Key points -->
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            "Moderní vybavení",
+            "Individuální přístup",
+            "Kutná Hora a okolí",
+          ].map(point => (
+            <div class="flex items-center gap-3">
+              <div class="flex-shrink-0 w-8 h-8 rounded-full bg-forest-400/20 flex items-center justify-center">
+                <svg class="w-4 h-4 text-forest-400" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/>
+                </svg>
+              </div>
+              <span class="text-forest-100 font-medium">{point}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

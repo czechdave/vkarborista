@@ -1,0 +1,114 @@
+@import "tailwindcss";
+
+@theme {
+  --color-forest-50: #f0fdf4;
+  --color-forest-100: #dcfce7;
+  --color-forest-200: #bbf7d0;
+  --color-forest-300: #86efac;
+  --color-forest-400: #4ade80;
+  --color-forest-500: #22c55e;
+  --color-forest-600: #16a34a;
+  --color-forest-700: #15803d;
+  --color-forest-800: #166534;
+  --color-forest-900: #14532d;
+  --color-forest-950: #052e16;
+
+  --color-bark-50: #fefce8;
+  --color-bark-100: #fef9c3;
+  --color-bark-200: #fef08a;
+  --color-bark-300: #fde047;
+  --color-bark-400: #facc15;
+  --color-bark-500: #b45309;
+  --color-bark-600: #92400e;
+  --color-bark-700: #78350f;
+  --color-bark-800: #654321;
+  --color-bark-900: #3b2506;
+
+  --color-leaf: #22c55e;
+  --color-moss: #15803d;
+  --color-trunk: #654321;
+
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: var(--font-body);
+    overflow-x: hidden;
+  }
+
+  ::selection {
+    background-color: var(--color-forest-300);
+    color: var(--color-forest-950);
+  }
+}
+
+@layer components {
+  .leaf-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M15 35c5-10 15-20 25-15s5 20-5 25-25-5-20-10z' fill='%2322c55e' opacity='0.04'/%3E%3C/svg%3E");
+  }
+
+  .ring-pattern {
+    background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='50' cy='50' r='40' fill='none' stroke='%2316a34a' stroke-width='0.5' opacity='0.07'/%3E%3Ccircle cx='50' cy='50' r='30' fill='none' stroke='%2316a34a' stroke-width='0.5' opacity='0.05'/%3E%3Ccircle cx='50' cy='50' r='20' fill='none' stroke='%2316a34a' stroke-width='0.5' opacity='0.03'/%3E%3C/svg%3E");
+  }
+
+  .bark-texture {
+    background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 20 Q10 15 20 20 Q30 25 40 20' fill='none' stroke='%23654321' stroke-width='0.5' opacity='0.06'/%3E%3Cpath d='M0 10 Q10 5 20 10 Q30 15 40 10' fill='none' stroke='%23654321' stroke-width='0.5' opacity='0.04'/%3E%3Cpath d='M0 30 Q10 25 20 30 Q30 35 40 30' fill='none' stroke='%23654321' stroke-width='0.5' opacity='0.04'/%3E%3C/svg%3E");
+  }
+}
+
+@layer utilities {
+  .text-shadow-hero {
+    text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  @keyframes sway {
+    0%, 100% { transform: rotate(-2deg); }
+    50% { transform: rotate(2deg); }
+  }
+
+  @keyframes sway-slow {
+    0%, 100% { transform: rotate(-1deg) translateX(-5px); }
+    50% { transform: rotate(1deg) translateX(5px); }
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes fall {
+    0% { transform: translateY(-10vh) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  @keyframes grow-up {
+    from { transform: scaleY(0); opacity: 0; }
+    to { transform: scaleY(1); opacity: 1; }
+  }
+
+  .animate-sway {
+    animation: sway 4s ease-in-out infinite;
+  }
+
+  .animate-sway-slow {
+    animation: sway-slow 6s ease-in-out infinite;
+  }
+
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+  }
+
+  .animate-fall {
+    animation: fall linear infinite;
+  }
+
+  .animate-grow {
+    animation: grow-up 1s ease-out both;
+  }
+}

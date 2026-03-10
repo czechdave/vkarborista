@@ -1,0 +1,97 @@
+---
+const year = new Date().getFullYear();
+---
+
+<footer class="relative bg-forest-950 text-white overflow-hidden">
+  <!-- Tree line silhouette -->
+  <div class="relative h-16 sm:h-24 bg-forest-50" aria-hidden="true">
+    <svg class="absolute bottom-0 left-0 w-full h-full" viewBox="0 0 1440 100" preserveAspectRatio="none">
+      <path d="M0 100 L0 80 C20 80 25 40 40 40 C55 40 55 65 70 65 C85 65 85 20 100 20 C115 20 115 55 130 55 C145 55 145 30 160 30 C175 30 175 70 190 70 C205 70 205 25 220 25 C235 25 235 60 250 60 C265 60 265 35 280 35 C295 35 295 75 310 75 C325 75 325 15 340 15 C355 15 355 50 370 50 C385 50 385 30 400 30 C415 30 415 65 430 65 C445 65 445 40 460 40 C475 40 475 20 490 20 C505 20 505 70 520 70 C535 70 535 25 550 25 C565 25 565 55 580 55 C595 55 595 35 610 35 C625 35 625 60 640 60 C655 60 655 45 670 45 C685 45 685 15 700 15 C715 15 715 50 730 50 C745 50 745 70 760 70 C775 70 775 30 790 30 C805 30 805 55 820 55 C835 55 835 40 850 40 C865 40 865 20 880 20 C895 20 895 65 910 65 C925 65 925 35 940 35 C955 35 955 75 970 75 C985 75 985 25 1000 25 C1015 25 1015 55 1030 55 C1045 55 1045 45 1060 45 C1075 45 1075 15 1090 15 C1105 15 1105 60 1120 60 C1135 60 1135 30 1150 30 C1165 30 1165 70 1180 70 C1195 70 1195 40 1210 40 C1225 40 1225 20 1240 20 C1255 20 1255 55 1270 55 C1285 55 1285 35 1300 35 C1315 35 1315 65 1330 65 C1345 65 1345 50 1360 50 C1375 50 1375 25 1390 25 C1405 25 1405 60 1420 60 C1435 60 1440 80 1440 80 L1440 100Z" fill="#052e16"/>
+    </svg>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-10">
+      <!-- Brand -->
+      <div>
+        <div class="flex items-center gap-3 mb-4">
+          <svg class="w-10 h-10" viewBox="0 0 64 64">
+            <circle cx="32" cy="32" r="30" fill="#166534"/>
+            <g transform="translate(32,18)">
+              <polygon points="0,-14 -12,6 12,6" fill="#4ade80"/>
+              <polygon points="0,-8 -16,14 16,14" fill="#22c55e"/>
+              <polygon points="0,-2 -20,22 20,22" fill="#16a34a"/>
+            </g>
+            <rect x="29" y="42" width="6" height="10" rx="1" fill="#854d0e"/>
+          </svg>
+          <div>
+            <div class="font-display font-bold text-lg">Vojta Koutský</div>
+            <div class="text-forest-400 text-sm font-medium">Arboristika</div>
+          </div>
+        </div>
+        <p class="text-forest-300/60 text-sm leading-relaxed">
+          Profesionální arboristika, řezání stromů a rizikové kácení v Kutné Hoře a okolí od roku 2018.
+        </p>
+      </div>
+
+      <!-- Quick links -->
+      <div>
+        <h4 class="font-display font-bold text-sm uppercase tracking-wider text-forest-400 mb-4">Navigace</h4>
+        <nav class="space-y-2">
+          {[
+            { href: "#sluzby", label: "Služby" },
+            { href: "#o-mne", label: "O mně" },
+            { href: "#galerie", label: "Galerie" },
+            { href: "#kontakt", label: "Kontakt" },
+          ].map(link => (
+            <a href={link.href} class="block text-forest-300/70 hover:text-forest-300 transition-colors text-sm">
+              {link.label}
+            </a>
+          ))}
+        </nav>
+      </div>
+
+      <!-- Contact -->
+      <div>
+        <h4 class="font-display font-bold text-sm uppercase tracking-wider text-forest-400 mb-4">Kontakt</h4>
+        <div class="space-y-3 text-sm">
+          <a href="tel:+420606535475" class="flex items-center gap-2 text-forest-300/70 hover:text-forest-300 transition-colors">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+            606 535 475
+          </a>
+          <a href="mailto:citac@seznam.cz" class="flex items-center gap-2 text-forest-300/70 hover:text-forest-300 transition-colors">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            citac@seznam.cz
+          </a>
+          <div class="flex items-center gap-2 text-forest-300/70">
+            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            Kutná Hora a Středočeský kraj
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="mt-12 pt-8 border-t border-forest-800/50 flex flex-col sm:flex-row items-center justify-between gap-4 text-sm text-forest-300/40">
+      <p>&copy; {year} Vojta Koutský — Arboristika. Všechna práva vyhrazena.</p>
+      <a
+        href="https://www.facebook.com/people/Vojta-Koutsk%C3%BD-Arboristika/61555456270844/"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="flex items-center gap-2 hover:text-forest-300/70 transition-colors"
+      >
+        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+        </svg>
+        Facebook
+      </a>
+    </div>
+  </div>
+</footer>

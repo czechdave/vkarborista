@@ -1,0 +1,151 @@
+---
+const items = [
+  { src: "/images/orezy/01-dub.jpg", title: "Obvodová redukce ořešáku" },
+  { src: "/images/orezy/08-lipa.jpg", title: "Ořez lípy" },
+  { src: "/images/orezy/03-vrba.jpg", title: "Redukce koruny" },
+  { src: "/images/orezy/09-vrba.jpg", title: "Obvodová redukce vrby" },
+  { src: "/images/orezy/10-dub.jpg", title: "Bezpečnostní řez dubu" },
+  { src: "/images/orezy/07-oresak.jpg", title: "Obvodová redukce ořešáku" },
+];
+---
+
+<section class="relative py-24 sm:py-32 bg-white overflow-hidden">
+  <!-- Decorative background -->
+  <div class="absolute inset-0 leaf-pattern"></div>
+
+  <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <!-- Section header -->
+    <div class="text-center mb-16 sm:mb-20">
+      <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-forest-100 text-forest-700 text-sm font-medium mb-6">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+        </svg>
+        Ořezy před a po
+      </div>
+      <h2 class="font-display text-4xl sm:text-5xl font-bold text-forest-900 mb-6">
+        Výsledky naší práce
+      </h2>
+      <p class="text-lg text-forest-600 max-w-2xl mx-auto">
+        Každý strom si zaslouží odbornou péči. Podívejte se, jaký rozdíl dokáže profesionální ořez udělat.
+      </p>
+    </div>
+
+    <!-- Before/After grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+      {items.map((item) => (
+        <div
+          class="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 bg-forest-50 cursor-pointer"
+          data-lightbox-src={item.src}
+          data-lightbox-title={item.title}
+        >
+          <div class="relative aspect-[3/4]">
+            <img
+              src={item.src}
+              alt={`${item.title} - před a po`}
+              class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
+              loading="lazy"
+            />
+            <!-- Labels -->
+            <div class="absolute top-3 left-3 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-red-500/90 text-white text-xs font-bold backdrop-blur-sm shadow-lg">
+                Před
+              </span>
+            </div>
+            <div class="absolute top-3 right-3 flex gap-2">
+              <span class="px-3 py-1 rounded-full bg-forest-500/90 text-white text-xs font-bold backdrop-blur-sm shadow-lg">
+                Po
+              </span>
+            </div>
+            <!-- Divider line hint -->
+            <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/30"></div>
+          </div>
+          <!-- Title bar -->
+          <div class="p-4 bg-white border-t border-forest-100">
+            <h3 class="font-display font-bold text-forest-900 text-center">
+              {item.title}
+            </h3>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<!-- Lightbox overlay -->
+<div
+  id="ba-lightbox"
+  class="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300"
+>
+  <!-- Close button -->
+  <button
+    id="ba-lightbox-close"
+    class="absolute top-4 right-4 z-10 w-10 h-10 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-2xl transition-colors"
+    aria-label="Zavřít"
+  >
+    &times;
+  </button>
+
+  <!-- Image container -->
+  <div class="relative max-w-[90vw] max-h-[85vh] flex flex-col items-center">
+    <div class="relative">
+      <img
+        id="ba-lightbox-img"
+        src=""
+        alt=""
+        class="max-w-[90vw] max-h-[75vh] object-contain rounded-2xl"
+      />
+      <!-- Před/Po labels -->
+      <div class="absolute top-3 left-3">
+        <span class="px-3 py-1 rounded-full bg-red-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
+          Před
+        </span>
+      </div>
+      <div class="absolute top-3 right-3">
+        <span class="px-3 py-1 rounded-full bg-forest-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
+          Po
+        </span>
+      </div>
+      <!-- Divider line -->
+      <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/30"></div>
+    </div>
+    <p id="ba-lightbox-title" class="mt-4 text-white font-display font-bold text-lg text-center"></p>
+  </div>
+</div>
+
+<script>
+  const overlay = document.getElementById('ba-lightbox')!;
+  const overlayImg = document.getElementById('ba-lightbox-img') as HTMLImageElement;
+  const overlayTitle = document.getElementById('ba-lightbox-title')!;
+  const closeBtn = document.getElementById('ba-lightbox-close')!;
+
+  function openLightbox(src: string, title: string) {
+    overlayImg.src = src;
+    overlayImg.alt = `${title} - před a po`;
+    overlayTitle.textContent = title;
+    overlay.classList.remove('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeLightbox() {
+    overlay.classList.add('opacity-0', 'pointer-events-none');
+    document.body.style.overflow = '';
+  }
+
+  // Card clicks
+  document.querySelectorAll<HTMLElement>('[data-lightbox-src]').forEach((card) => {
+    card.addEventListener('click', () => {
+      const src = card.dataset.lightboxSrc!;
+      const title = card.dataset.lightboxTitle!;
+      openLightbox(src, title);
+    });
+  });
+
+  // Close on button, backdrop click, Escape
+  closeBtn.addEventListener('click', closeLightbox);
+  overlay.addEventListener('click', (e) => {
+    if (e.target === overlay) closeLightbox();
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>

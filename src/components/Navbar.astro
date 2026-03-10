@@ -1,0 +1,108 @@
+---
+const links = [
+  { href: "#sluzby", label: "Služby" },
+  { href: "#o-mne", label: "O mně" },
+  { href: "#galerie", label: "Galerie" },
+  { href: "#kontakt", label: "Kontakt" },
+];
+---
+
+<nav class="fixed top-0 left-0 right-0 z-40 transition-all duration-300" id="navbar">
+  <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16 sm:h-20">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 group">
+        <svg class="w-9 h-9 sm:w-10 sm:h-10 transition-transform group-hover:scale-110" viewBox="0 0 64 64">
+          <circle cx="32" cy="32" r="30" fill="#166534"/>
+          <g transform="translate(32,18)">
+            <polygon points="0,-14 -12,6 12,6" fill="#4ade80"/>
+            <polygon points="0,-8 -16,14 16,14" fill="#22c55e"/>
+            <polygon points="0,-2 -20,22 20,22" fill="#16a34a"/>
+          </g>
+          <rect x="29" y="42" width="6" height="10" rx="1" fill="#854d0e"/>
+        </svg>
+        <span class="font-display font-bold text-lg sm:text-xl text-white drop-shadow-lg" id="nav-title">
+          Arboristika
+        </span>
+      </a>
+
+      <!-- Desktop links -->
+      <div class="hidden md:flex items-center gap-1">
+        {links.map(link => (
+          <a
+            href={link.href}
+            class="px-4 py-2 rounded-full text-sm font-medium text-white/90 hover:text-white hover:bg-white/10 transition-all duration-200"
+          >
+            {link.label}
+          </a>
+        ))}
+        <a
+          href="tel:+420606535475"
+          class="ml-2 px-5 py-2 rounded-full bg-forest-400 text-forest-950 font-semibold text-sm hover:bg-forest-300 transition-all duration-200 shadow-lg hover:shadow-xl hover:scale-105"
+        >
+          Zavolat
+        </a>
+      </div>
+
+      <!-- Mobile menu button -->
+      <button
+        id="mobile-menu-btn"
+        class="md:hidden p-2 rounded-lg text-white hover:bg-white/10 transition-colors"
+        aria-label="Menu"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden hidden bg-forest-900/95 backdrop-blur-lg border-t border-white/10">
+    <div class="px-4 py-4 space-y-1">
+      {links.map(link => (
+        <a
+          href={link.href}
+          class="block px-4 py-3 rounded-lg text-white/90 hover:text-white hover:bg-white/10 transition-colors font-medium mobile-link"
+        >
+          {link.label}
+        </a>
+      ))}
+      <a
+        href="tel:+420606535475"
+        class="block px-4 py-3 mt-2 rounded-lg bg-forest-400 text-forest-950 font-semibold text-center mobile-link"
+      >
+        Zavolat: 606 535 475
+      </a>
+    </div>
+  </div>
+</nav>
+
+<script>
+  // Navbar scroll effect
+  const navbar = document.getElementById('navbar')!;
+  const navTitle = document.getElementById('nav-title')!;
+
+  function updateNavbar() {
+    if (window.scrollY > 50) {
+      navbar.classList.add('bg-forest-900/95', 'backdrop-blur-lg', 'shadow-xl');
+    } else {
+      navbar.classList.remove('bg-forest-900/95', 'backdrop-blur-lg', 'shadow-xl');
+    }
+  }
+
+  window.addEventListener('scroll', updateNavbar, { passive: true });
+  updateNavbar();
+
+  // Mobile menu
+  const btn = document.getElementById('mobile-menu-btn')!;
+  const menu = document.getElementById('mobile-menu')!;
+
+  btn.addEventListener('click', () => {
+    menu.classList.toggle('hidden');
+  });
+
+  document.querySelectorAll('.mobile-link').forEach(link => {
+    link.addEventListener('click', () => menu.classList.add('hidden'));
+  });
+</script>
