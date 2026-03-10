@@ -1,15 +1,20 @@
 ---
-// Hero section with real cover photo background
+import { Picture, Image } from 'astro:assets';
+import heroCover from '../assets/images/hero-cover.jpg';
+import logo from '../assets/images/logo.jpg';
 ---
 
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden bg-forest-950">
   <!-- Cover photo background -->
   <div class="absolute inset-0">
-    <img
-      src="/images/hero-cover.jpg"
+    <Picture
+      src={heroCover}
+      widths={[640, 828, 1080, 1536]}
+      formats={['webp']}
       alt=""
       class="w-full h-full object-cover opacity-40"
       loading="eager"
+      layout="full-width"
     />
   </div>
 
@@ -24,8 +29,11 @@
   <div class="relative z-20 text-center px-4 max-w-4xl mx-auto">
     <!-- Real logo image -->
     <div class="mb-8 inline-block animate-float">
-      <img
-        src="/images/logo.jpg"
+      <Image
+        src={logo}
+        width={352}
+        densities={[1, 2]}
+        format="webp"
         alt="Vojta Koutský - Arboristika logo"
         class="w-36 h-36 sm:w-44 sm:h-44 mx-auto rounded-3xl shadow-2xl border-2 border-forest-400/30 object-cover"
         loading="eager"

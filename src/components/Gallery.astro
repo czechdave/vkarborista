@@ -1,13 +1,33 @@
 ---
-const galleryItems = [
-  { src: "/images/galerie/01-stromolezeni.jpg", title: "Práce ve výškách", desc: "Stromolezení u elektrického vedení" },
-  { src: "/images/galerie/02-tym.jpg", title: "Týmová spolupráce", desc: "Rojení arboristů v korunách stromů" },
-  { src: "/images/galerie/03-selfie.jpg", title: "Pohled z koruny", desc: "Selfie z pracoviště vysoko nad zemí" },
-  { src: "/images/galerie/04-pohled-zhora.jpg", title: "Pohled shora", desc: "Řízené spouštění větví" },
-  { src: "/images/galerie/05-kaceni-smrku.jpg", title: "Kácení smrku", desc: "Zpracování velkého jehličnanu u domu" },
-  { src: "/images/galerie/06-zpracovani.jpg", title: "Zpracování dřeva", desc: "Odborné rozřezání kmene na hřbitově" },
-  { src: "/images/galerie/07-letecky.jpg", title: "Letecký pohled", desc: "Pohled z výšky na pracoviště" },
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/images/galerie/*.jpg', { eager: true });
+
+function resolve(filename: string) {
+  const path = `../assets/images/galerie/${filename}`;
+  const img = images[path];
+  if (!img) throw new Error(`Gallery image not found: ${filename}`);
+  return img.default;
+}
+
+const rawGalleryItems = [
+  { file: "01-stromolezeni.jpg", title: "Práce ve výškách", desc: "Stromolezení u elektrického vedení" },
+  { file: "02-tym.jpg", title: "Týmová spolupráce", desc: "Rojení arboristů v korunách stromů" },
+  { file: "03-selfie.jpg", title: "Pohled z koruny", desc: "Selfie z pracoviště vysoko nad zemí" },
+  { file: "04-pohled-zhora.jpg", title: "Pohled shora", desc: "Řízené spouštění větví" },
+  { file: "05-kaceni-smrku.jpg", title: "Kácení smrku", desc: "Zpracování velkého jehličnanu u domu" },
+  { file: "06-zpracovani.jpg", title: "Zpracování dřeva", desc: "Odborné rozřezání kmene na hřbitově" },
+  { file: "07-letecky.jpg", title: "Letecký pohled", desc: "Pohled z výšky na pracoviště" },
 ];
+
+const galleryItems = await Promise.all(
+  rawGalleryItems.map(async (item) => {
+    const src = resolve(item.file);
+    const lightbox = await getImage({ src, width: 1200, format: 'webp' });
+    return { ...item, src, lightboxSrc: lightbox.src };
+  })
+);
 ---
 
 <section id="galerie" class="relative py-24 sm:py-32 bg-forest-50 overflow-hidden">
@@ -39,12 +59,20 @@ const galleryItems = [
     <!-- Gallery grid -->
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
       {galleryItems.map((item, i) => (
-        <div class:list={[
-          "group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1",
-          i === 0 || i === 7 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]",
-        ]}>
-          <img
+        <div
+          class:list={[
+            "group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 cursor-pointer",
+            i === 0 || i === 7 ? "sm:col-span-2 aspect-[16/9]" : "aspect-[4/3]",
+          ]}
+          data-lightbox-src={item.lightboxSrc}
+          data-lightbox-title={item.title}
+          data-lightbox-type="gallery"
+        >
+          <Image
             src={item.src}
+            widths={[400, 640, 828]}
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            format="webp"
             alt={item.title}
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"

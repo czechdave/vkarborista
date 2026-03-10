@@ -1,12 +1,32 @@
 ---
-const items = [
-  { src: "/images/orezy/01-dub.jpg", title: "Obvodová redukce ořešáku" },
-  { src: "/images/orezy/08-lipa.jpg", title: "Ořez lípy" },
-  { src: "/images/orezy/03-vrba.jpg", title: "Redukce koruny" },
-  { src: "/images/orezy/09-vrba.jpg", title: "Obvodová redukce vrby" },
-  { src: "/images/orezy/10-dub.jpg", title: "Bezpečnostní řez dubu" },
-  { src: "/images/orezy/07-oresak.jpg", title: "Obvodová redukce ořešáku" },
+import { Image, getImage } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+
+const images = import.meta.glob<{ default: ImageMetadata }>('../assets/images/orezy/*.jpg', { eager: true });
+
+function resolve(filename: string) {
+  const path = `../assets/images/orezy/${filename}`;
+  const img = images[path];
+  if (!img) throw new Error(`Orezy image not found: ${filename}`);
+  return img.default;
+}
+
+const rawItems = [
+  { file: "01-dub.jpg", title: "Obvodová redukce ořešáku", hsplit: true },
+  { file: "08-lipa.jpg", title: "Ořez lípy" },
+  { file: "03-vrba.jpg", title: "Redukce koruny" },
+  { file: "09-vrba.jpg", title: "Obvodová redukce vrby" },
+  { file: "10-dub.jpg", title: "Bezpečnostní řez dubu", hsplit: true },
+  { file: "07-oresak.jpg", title: "Obvodová redukce ořešáku" },
 ];
+
+const items = await Promise.all(
+  rawItems.map(async (item) => {
+    const src = resolve(item.file);
+    const lightbox = await getImage({ src, width: 1200, format: 'webp' });
+    return { ...item, src, lightboxSrc: lightbox.src };
+  })
+);
 ---
 
 <section class="relative py-24 sm:py-32 bg-white overflow-hidden">
@@ -35,29 +55,35 @@ const items = [
       {items.map((item) => (
         <div
           class="group relative rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-1 bg-forest-50 cursor-pointer"
-          data-lightbox-src={item.src}
+          data-lightbox-src={item.lightboxSrc}
           data-lightbox-title={item.title}
+          data-lightbox-hsplit={item.hsplit ? "true" : undefined}
+          data-lightbox-type="ba"
         >
           <div class="relative aspect-[3/4]">
-            <img
+            <Image
               src={item.src}
+              widths={[300, 450, 600]}
+              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+              format="webp"
               alt={`${item.title} - před a po`}
               class="w-full h-full object-cover group-hover:scale-[1.02] transition-transform duration-700"
               loading="lazy"
             />
             <!-- Labels -->
-            <div class="absolute top-3 left-3 flex gap-2">
+            <div class="absolute top-3 left-3">
               <span class="px-3 py-1 rounded-full bg-red-500/90 text-white text-xs font-bold backdrop-blur-sm shadow-lg">
                 Před
               </span>
             </div>
-            <div class="absolute top-3 right-3 flex gap-2">
+            <div class:list={[
+              "absolute",
+              item.hsplit ? "top-[calc(50%+0.75rem)] left-3" : "top-3 right-3",
+            ]}>
               <span class="px-3 py-1 rounded-full bg-forest-500/90 text-white text-xs font-bold backdrop-blur-sm shadow-lg">
                 Po
               </span>
             </div>
-            <!-- Divider line hint -->
-            <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/30"></div>
           </div>
           <!-- Title bar -->
           <div class="p-4 bg-white border-t border-forest-100">
@@ -92,21 +118,21 @@ const items = [
         id="ba-lightbox-img"
         src=""
         alt=""
-        class="max-w-[90vw] max-h-[75vh] object-contain rounded-2xl"
+        class="max-w-[90vw] max-h-[75vh] object-contain rounded-2xl transition-opacity duration-200"
       />
       <!-- Před/Po labels -->
-      <div class="absolute top-3 left-3">
-        <span class="px-3 py-1 rounded-full bg-red-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
-          Před
-        </span>
+      <div id="ba-lightbox-labels">
+        <div class="absolute top-3 left-3">
+          <span class="px-3 py-1 rounded-full bg-red-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
+            Před
+          </span>
+        </div>
+        <div id="ba-lightbox-po" class="absolute top-3 right-3">
+          <span class="px-3 py-1 rounded-full bg-forest-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
+            Po
+          </span>
+        </div>
       </div>
-      <div class="absolute top-3 right-3">
-        <span class="px-3 py-1 rounded-full bg-forest-500/90 text-white text-sm font-bold backdrop-blur-sm shadow-lg">
-          Po
-        </span>
-      </div>
-      <!-- Divider line -->
-      <div class="absolute top-0 bottom-0 left-1/2 w-px bg-white/30"></div>
     </div>
     <p id="ba-lightbox-title" class="mt-4 text-white font-display font-bold text-lg text-center"></p>
   </div>
@@ -116,14 +142,33 @@ const items = [
   const overlay = document.getElementById('ba-lightbox')!;
   const overlayImg = document.getElementById('ba-lightbox-img') as HTMLImageElement;
   const overlayTitle = document.getElementById('ba-lightbox-title')!;
+  const overlayPo = document.getElementById('ba-lightbox-po')!;
+  const overlayLabels = document.getElementById('ba-lightbox-labels')!;
   const closeBtn = document.getElementById('ba-lightbox-close')!;
 
-  function openLightbox(src: string, title: string) {
+  function openLightbox(src: string, title: string, hsplit: boolean, type: string) {
+    overlayImg.style.opacity = '0';
     overlayImg.src = src;
-    overlayImg.alt = `${title} - před a po`;
+    overlayImg.alt = type === 'ba' ? `${title} - před a po` : title;
     overlayTitle.textContent = title;
+    if (type === 'gallery') {
+      overlayLabels.style.display = 'none';
+    } else {
+      overlayLabels.style.display = '';
+      if (hsplit) {
+        overlayPo.className = 'absolute top-[calc(50%+0.75rem)] left-3';
+      } else {
+        overlayPo.className = 'absolute top-3 right-3';
+      }
+    }
     overlay.classList.remove('opacity-0', 'pointer-events-none');
     document.body.style.overflow = 'hidden';
+
+    if (overlayImg.complete) {
+      overlayImg.style.opacity = '1';
+    } else {
+      overlayImg.onload = () => { overlayImg.style.opacity = '1'; };
+    }
   }
 
   function closeLightbox() {
@@ -136,7 +181,9 @@ const items = [
     card.addEventListener('click', () => {
       const src = card.dataset.lightboxSrc!;
       const title = card.dataset.lightboxTitle!;
-      openLightbox(src, title);
+      const hsplit = card.dataset.lightboxHsplit === 'true';
+      const type = card.dataset.lightboxType || 'ba';
+      openLightbox(src, title, hsplit, type);
     });
   });
 
