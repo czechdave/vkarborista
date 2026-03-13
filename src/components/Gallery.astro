@@ -12,13 +12,13 @@ function resolve(filename: string) {
 }
 
 const rawGalleryItems = [
-  { file: "01-stromolezeni.jpg", title: "Práce ve výškách", desc: "Stromolezení u elektrického vedení" },
-  { file: "02-tym.jpg", title: "Týmová spolupráce", desc: "Rojení arboristů v korunách stromů" },
-  { file: "03-selfie.jpg", title: "Pohled z koruny", desc: "Selfie z pracoviště vysoko nad zemí" },
-  { file: "04-pohled-zhora.jpg", title: "Pohled shora", desc: "Řízené spouštění větví" },
-  { file: "05-kaceni-smrku.jpg", title: "Kácení smrku", desc: "Zpracování velkého jehličnanu u domu" },
-  { file: "06-zpracovani.jpg", title: "Zpracování dřeva", desc: "Odborné rozřezání kmene na hřbitově" },
-  { file: "07-letecky.jpg", title: "Letecký pohled", desc: "Pohled z výšky na pracoviště" },
+  { file: "01-stromolezeni.jpg", title: "Práce ve výškách", desc: "Stromolezení u elektrického vedení", alt: "Arborista při stromolezení u elektrického vedení v Kutné Hoře" },
+  { file: "02-tym.jpg", title: "Týmová spolupráce", desc: "Rojení arboristů v korunách stromů", alt: "Tým arboristů při ořezu v korunách stromů" },
+  { file: "03-selfie.jpg", title: "Pohled z koruny", desc: "Selfie z pracoviště vysoko nad zemí", alt: "Arborista Vojta Koutský při práci vysoko v koruně stromu" },
+  { file: "04-pohled-zhora.jpg", title: "Pohled shora", desc: "Řízené spouštění větví", alt: "Řízené spouštění větví při ořezu stromu — pohled shora" },
+  { file: "05-kaceni-smrku.jpg", title: "Kácení smrku", desc: "Zpracování velkého jehličnanu u domu", alt: "Rizikové kácení velkého smrku u rodinného domu" },
+  { file: "06-zpracovani.jpg", title: "Zpracování dřeva", desc: "Odborné rozřezání kmene na hřbitově", alt: "Odborné zpracování pokáceného kmene motorovou pilou" },
+  { file: "07-letecky.jpg", title: "Letecký pohled", desc: "Pohled z výšky na pracoviště", alt: "Letecký pohled na arboristické pracoviště v Kutné Hoře" },
 ];
 
 const galleryItems = await Promise.all(
@@ -49,10 +49,10 @@ const galleryItems = await Promise.all(
         Galerie
       </div>
       <h2 class="font-display text-4xl sm:text-5xl font-bold text-forest-900 mb-6">
-        Naše práce v terénu
+        Práce v terénu
       </h2>
       <p class="text-lg text-forest-600 max-w-2xl mx-auto">
-        Podívejte se na naši práci. Každý strom má svůj příběh a my se snažíme, aby měl ten nejlepší možný konec.
+        Pár fotek z terénu. Každá zakázka je jiná — podívejte se, jak to vypadá v praxi.
       </p>
     </div>
 
@@ -73,7 +73,7 @@ const galleryItems = await Promise.all(
             widths={[400, 640, 828]}
             sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
             format="webp"
-            alt={item.title}
+            alt={item.alt}
             class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
             loading="lazy"
           />

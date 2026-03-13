@@ -7,8 +7,8 @@ interface Props {
 }
 
 const {
-  title = "Arboristika Kutná Hora | Vojta Koutský – Řezání a kácení stromů",
-  description = "Profesionální arboristika a rizikové kácení stromů v Kutné Hoře a okolí. Řezání stromů, ořez korun, zdravotní řezy. Vojta Koutský – arborista od roku 2018."
+  title = "Arborista Kutná Hora | Vojta Koutský – Ořez stromů a rizikové kácení",
+  description = "Profesionální ořez stromů, rizikové kácení a péče o zeleň v Kutné Hoře a okolí. Vojta Koutský — arborista s praxí od roku 2018. Zavolejte 606 535 475."
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -20,8 +20,9 @@ const ogImage = new URL('/images/hero-cover.jpg', Astro.site);
     <meta charset="utf-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#052e16" />
     <meta name="description" content={description} />
-    <meta name="keywords" content="arboristika, arborista, řezání stromů, kácení stromů, rizikové kácení, ořez stromů, péče o stromy, Kutná Hora, Středočeský kraj, zdravotní řez, bezpečnostní řez, ořezávání korun" />
+    <meta name="keywords" content="arborista Kutná Hora, ořez stromů, kácení stromů, rizikové kácení, arborista Středočeský kraj, péče o stromy, Kutná Hora, Středočeský kraj, zdravotní řez, bezpečnostní řez, ořez korun, arboristika" />
     <meta name="author" content="Vojta Koutský" />
     <meta name="generator" content={Astro.generator} />
 
@@ -40,6 +41,8 @@ const ogImage = new URL('/images/hero-cover.jpg', Astro.site);
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1536" />
+    <meta property="og:image:height" content="2048" />
     <meta property="og:locale" content="cs_CZ" />
     <meta property="og:site_name" content="Vojta Koutský – Arboristika" />
 
@@ -52,51 +55,133 @@ const ogImage = new URL('/images/hero-cover.jpg', Astro.site);
     <!-- Structured Data -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
-      "@type": "LocalBusiness",
-      "@id": "https://vkarborista.cz",
-      "name": "Vojta Koutský – Arboristika",
-      "description": "Profesionální arboristika a rizikové kácení stromů v Kutné Hoře a okolí. Řezání stromů, ořez korun, zdravotní řezy od roku 2018.",
-      "url": "https://vkarborista.cz",
-      "telephone": "+420606535475",
-      "email": "citac@seznam.cz",
-      "image": "https://vkarborista.cz/images/hero-cover.jpg",
-      "foundingDate": "2018",
-      "areaServed": [
+      "@graph": [
         {
-          "@type": "City",
-          "name": "Kutná Hora"
+          "@type": "WebSite",
+          "@id": "https://vkarborista.cz/#website",
+          "name": "Vojta Koutský — Arboristika",
+          "url": "https://vkarborista.cz",
+          "publisher": { "@id": "https://vkarborista.cz/#business" }
         },
         {
-          "@type": "AdministrativeArea",
-          "name": "Středočeský kraj"
+          "@type": "Person",
+          "@id": "https://vkarborista.cz/#person",
+          "name": "Vojta Koutský",
+          "jobTitle": "Arborista",
+          "worksFor": { "@id": "https://vkarborista.cz/#business" },
+          "knowsAbout": ["Arboristika", "Ořez stromů", "Rizikové kácení", "Péče o stromy"],
+          "sameAs": [
+            "https://www.facebook.com/people/Vojta-Koutsk%C3%BD-Arboristika/61555456270844/"
+          ]
+        },
+        {
+          "@type": "LocalBusiness",
+          "@id": "https://vkarborista.cz/#business",
+          "name": "Vojta Koutský — Arboristika",
+          "description": "Profesionální péče o stromy, ořez a rizikové kácení v Kutné Hoře a Středočeském kraji",
+          "url": "https://vkarborista.cz",
+          "telephone": "+420606535475",
+          "email": "citac@seznam.cz",
+          "image": "https://vkarborista.cz/images/hero-cover.jpg",
+          "foundingDate": "2018",
+          "founder": { "@id": "https://vkarborista.cz/#person" },
+          "areaServed": {
+            "@type": "GeoCircle",
+            "geoMidpoint": {
+              "@type": "GeoCoordinates",
+              "latitude": 49.9481,
+              "longitude": 15.2681
+            },
+            "geoRadius": "50000"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Kutná Hora",
+            "addressRegion": "Středočeský kraj",
+            "addressCountry": "CZ"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 49.9481,
+            "longitude": 15.2681
+          },
+          "sameAs": [
+            "https://www.facebook.com/people/Vojta-Koutsk%C3%BD-Arboristika/61555456270844/"
+          ],
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": "Arboristické služby",
+            "itemListElement": [
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-rizikove-kaceni",
+                  "name": "Rizikové kácení stromů",
+                  "description": "Bezpečné kácení stromů v těsné blízkosti budov, elektrického vedení a cest. Provádíme po kusech s jištěním každé větve.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-orez-korun",
+                  "name": "Ořez korun",
+                  "description": "Odborný ořez korun stromů podle arboristických standardů. Propustí více světla a podpoří přirozený růst.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-zdravotni-rez",
+                  "name": "Zdravotní řez",
+                  "description": "Odstranění suchých, poškozených a nemocných větví pro posílení stromu a podporu jeho obnovy.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-bezpecnostni-rez",
+                  "name": "Bezpečnostní řez",
+                  "description": "Odstranění rizikových větví ohrožujících střechy, chodníky nebo osoby. Prevence škod a úrazů.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-instalace-vazeb",
+                  "name": "Instalace vazeb",
+                  "description": "Zajištění rozeklaných korun speciálními lany a vázacími systémy proti rozlomení.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              },
+              {
+                "@type": "Offer",
+                "itemOffered": {
+                  "@type": "Service",
+                  "@id": "https://vkarborista.cz/#service-konzultace",
+                  "name": "Konzultace a posudky",
+                  "description": "Odborné posouzení stavu stromů, poradenství a příprava cenových nabídek na místě.",
+                  "provider": { "@id": "https://vkarborista.cz/#business" },
+                  "areaServed": { "@type": "Place", "name": "Kutná Hora a Středočeský kraj" }
+                }
+              }
+            ]
+          }
         }
-      ],
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Kutná Hora",
-        "addressRegion": "Středočeský kraj",
-        "addressCountry": "CZ"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 49.9481,
-        "longitude": 15.2683
-      },
-      "sameAs": [
-        "https://www.facebook.com/people/Vojta-Koutsk%C3%BD-Arboristika/61555456270844/"
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Arboristické služby",
-        "itemListElement": [
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Rizikové kácení stromů" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Ořezávání korun" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Zdravotní řez" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Bezpečnostní řez" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Instalace vazeb" } },
-          { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Konzultace a posudky" } }
-        ]
-      }
+      ]
     })} />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
